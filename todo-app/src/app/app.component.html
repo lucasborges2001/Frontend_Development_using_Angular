@@ -1,11 +1,11 @@
 <div class="container">
     <h1>Lista de Tareas</h1>
     <div class="form-container">
-        <input type="text" placeholder="Nueva tarea" class="task-input">
-        <button class="add-button">Agregar</button>
+        <input type="text" [(ngModel)]="newTask" placeholder="Nueva tarea" class="task-input">
+        <button class="add-button" (click)="addTask()">Agregar</button>
     </div>
     <ul class="task-list">
-        <app-task-item [task]="'Tarea de ejemplo 1'"></app-task-item>
-        <app-task-item [task]="'Tarea de ejemplo 2'"></app-task-item>
+        <app-task-item *ngFor="let task of tasks" [task]="task" [ngClass]="{'completed': task === completedTask}" (click)="toggleComplete(task)"></app-task-item>
     </ul>
-  </div>
+    <p *ngIf="tasks.length === 0">No hay tareas pendientes.</p>
+</div>
